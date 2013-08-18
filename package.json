@@ -1,0 +1,13 @@
+{
+  "name": "its-midnight-in",
+  "version": "0.0.1",
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "oauth": "0.9.10",
+    "nconf": "0.6.7"
+    },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
