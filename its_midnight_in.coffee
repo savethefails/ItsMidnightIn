@@ -13,7 +13,7 @@ class ItsMidnightIn
     @checkRequirements()
     @setOauth()
     @checkTime()
-    setInterval @checkTime, 100
+    setInterval @checkTime, 5000
     return @
 
   checkRequirements: ->
@@ -34,12 +34,12 @@ class ItsMidnightIn
     now = new Date()
     hour = now.getUTCHours()
     minute = now.getUTCMinutes()
-    # console.log "#{hour}:#{minute}"
-    console.log @getCity Math.floor Math.random() * 24
-    # if minute is 0
-      # city = @getCity hour
-      # status = @buildStatus city
-      # @sendTweet status
+    console.log "#{hour}:#{minute}"
+    # console.log @getCity Math.floor Math.random() * 24
+    if minute is 0
+      city = @getCity hour
+      status = @buildStatus city
+      @sendTweet status
 
   buildStatus: (city) -> "It's midnight in #{city}"
 
@@ -102,16 +102,18 @@ class ItsMidnightIn
   getUTCDistance: (hour) -> if hour < 12 then 0 - hour else 24 - hour
 
   sendTweet: (status) ->
-    return unless status?
+    unless status?
+      console.log "Warning: No status"
+      return
     @oauth.post(
       nodeConf.get('tweet_url')
     , nodeConf.get('access_token')
     , nodeConf.get('access_secret')
-    ,  status: status
+    , status: status
     , (e, data, res) ->
         console.log ''
         console.log ''
-        console.log 'Error!', new Date(), e if e?
+        console.log "Error!", new Date(), e if e?
     )
   
   # [List of tz database time zones](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
