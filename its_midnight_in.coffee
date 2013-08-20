@@ -342,8 +342,47 @@ class ItsMidnightIn
           "Guadeloupe"
           "Georgetown, Guyana"
           "Havana, Cuba"
-          "Marengo, USA"
+          "Marengo, United States of America"
+          "New York City, United States of America"
           ]
+    "-5": [
+          "Chicago, United States of America"
+          "Mexico City, Mexico"
+          "Panama City, Panama"
+          "Winnipeg, Canada"
+          "Kingston, Jamaica"
+    "-6": [
+          "Devner, United States of America"
+          "Edmonton, Canada"
+          "Belize City, Belize"
+          "San José, Costa Rica"
+    "-7": [
+          "Los Angeles, United States of America"
+          "Tijuana, Mexico"
+          "Vancouver, Canada"
+          "San José, Costa Rica"
+          "Whitehorse, Canada"
+    "-8": [
+          "Anchorage, United States of America"
+          "Juneau, United States of America"
+          "Noma, United States of America"
+          "Adamstown, Pitcairn Islands"
+    "-9": [
+          "Adak, United States of America"
+          "the Mangareva Islands, French Polynesia"
+    "-10": [
+          "Honolulu, United States of America"
+          "the Johnston Atoll"
+          "Rarotonga, Cook Islands"
+          "Papeete, Tahiti"
+    "-11": [
+          "the Midway Islands"
+          "Alofi, Niue"
+          "Papeete, Tahiti"
+          "Pago Pago, American Samoa"
+
+
+
 
   setOauth: ->
     @oauth = new OAuth.OAuth(
