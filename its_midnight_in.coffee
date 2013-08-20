@@ -13,7 +13,7 @@ class ItsMidnightIn
     @checkRequirements()
     @setOauth()
     @checkTime()
-    setInterval @checkTime, 5000
+    setInterval @checkTime, 100
     return @
 
   checkRequirements: ->
@@ -35,7 +35,7 @@ class ItsMidnightIn
     hour = now.getUTCHours()
     minute = now.getUTCMinutes()
     # console.log "#{hour}:#{minute}"
-    console.log @getCity (Math.floor Math.random() * 12) + 12
+    console.log @getCity Math.floor Math.random() * 24
     # if minute is 0
       # city = @getCity hour
       # status = @buildStatus city
@@ -351,35 +351,42 @@ class ItsMidnightIn
           "Panama City, Panama"
           "Winnipeg, Canada"
           "Kingston, Jamaica"
+          ] 
     "-6": [
           "Devner, United States of America"
           "Edmonton, Canada"
           "Belize City, Belize"
           "San José, Costa Rica"
+          ]
     "-7": [
           "Los Angeles, United States of America"
           "Tijuana, Mexico"
           "Vancouver, Canada"
           "San José, Costa Rica"
           "Whitehorse, Canada"
+          ] 
     "-8": [
           "Anchorage, United States of America"
           "Juneau, United States of America"
           "Noma, United States of America"
           "Adamstown, Pitcairn Islands"
+          ] 
     "-9": [
           "Adak, United States of America"
           "the Mangareva Islands, French Polynesia"
+          ] 
     "-10": [
           "Honolulu, United States of America"
           "the Johnston Atoll"
           "Rarotonga, Cook Islands"
           "Papeete, Tahiti"
+          ]
     "-11": [
           "the Midway Islands"
           "Alofi, Niue"
           "Papeete, Tahiti"
           "Pago Pago, American Samoa"
+          ] 
 
 
 
