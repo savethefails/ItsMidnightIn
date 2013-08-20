@@ -13,7 +13,7 @@ class ItsMidnightIn
     @checkRequirements()
     @setOauth()
     @checkTime()
-    setInterval @checkTime, 35000
+    setInterval @checkTime, 45000
     return @
 
   checkRequirements: ->
