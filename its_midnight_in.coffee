@@ -48,7 +48,7 @@ class ItsMidnightIn
     msg = ""
     msg += "#{if msg isnt "" then " " else ""}#midnight" if num > 4
     msg += "#{if msg isnt "" then " " else ""}#12am" if num > 6
-    msg = "\r\n#{msg}" if msg isnt ""
+    msg = "\r\n #{msg}" if msg isnt ""
     return msg
 
 
