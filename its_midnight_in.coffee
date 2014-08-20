@@ -36,7 +36,7 @@ class ItsMidnightIn
     minute = now.getUTCMinutes()
     console.log "#{hour}:#{minute}"
     # console.log @getCity Math.floor Math.random() * 24
-    if minute is 3
+    if minute is 7
       city = @getCity hour
       status = @buildStatus city
       @sendTweet status
@@ -48,6 +48,7 @@ class ItsMidnightIn
     msg = ""
     msg += "#{if msg isnt "" then " " else ""}#midnight" if num > 4
     msg += "#{if msg isnt "" then " " else ""}#12am" if num > 6
+    msg = "\r\n#{msg}" if msg isnt ""
     return msg
 
 
