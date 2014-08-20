@@ -41,14 +41,14 @@ class ItsMidnightIn
       status = @buildStatus city
       @sendTweet status
 
-  buildStatus: (city) -> "It's midnight in #{city} #{@randomHashtag()}"
+  buildStatus: (city) -> "It's midnight in #{city}#{@randomHashtag()}"
 
   randomHashtag: ->
     num = Math.floor(Math.random()*10)
     msg = ""
     msg += "#{if msg isnt "" then " " else ""}#midnight" if num > 4
     msg += "#{if msg isnt "" then " " else ""}#12am" if num > 6
-    msg = "\r\n #{msg}" if msg isnt ""
+    msg = "\r\n#{msg}" if msg isnt ""
     return msg
 
 
