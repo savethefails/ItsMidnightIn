@@ -36,7 +36,7 @@ class ItsMidnightIn
     minute = now.getUTCMinutes()
     console.log "#{hour}:#{minute}"
     # console.log @getCity Math.floor Math.random() * 24
-    if minute is 7
+    if true #minute is 7
       city = @getCity hour
       status = @buildStatus city
       @sendTweet status
