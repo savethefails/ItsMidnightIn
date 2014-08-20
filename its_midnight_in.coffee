@@ -36,12 +36,12 @@ class ItsMidnightIn
     minute = now.getUTCMinutes()
     console.log "#{hour}:#{minute}"
     # console.log @getCity Math.floor Math.random() * 24
-    if minute is 0
+    if minute is 3
       city = @getCity hour
       status = @buildStatus city
       @sendTweet status
 
-  buildStatus: (city) -> "It's midnight in #{city} #{randomHashtag()}"
+  buildStatus: (city) -> "It's midnight in #{city} #{@randomHashtag()}"
 
   randomHashtag: ->
     num = Math.floor(Math.random()*10)
