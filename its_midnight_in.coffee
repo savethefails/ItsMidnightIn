@@ -357,11 +357,11 @@ class ItsMidnightIn
           "New York City, United States of America"
           ]
     "-5": [
-          # "Chicago, United States of America"
-          # "Mexico City, Mexico"
-          # "Panama City, Panama"
-          # "Winnipeg, Canada"
-          # "Kingston, Jamaica"
+          "#Chicago, United States of America"
+          "Mexico City, #Mexico"
+          "Panama City, #Panama"
+          "#Winnipeg, Canada"
+          "#Kingston, Jamaica"
           "#Ferguson, Missouri"
           ]
     "-6": [
