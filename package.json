@@ -2,9 +2,11 @@
   "name": "its-midnight-in",
   "version": "0.0.1",
   "dependencies": {
-    "coffee-script": "~1.6.3",
+    "coffee-script": "~1.8.0",
     "oauth": "0.9.10",
-    "nconf": "0.6.7"
+    "nconf": "0.6.7",
+    "underscore": "",
+    "node-twitter": "istrategylabs/node-twitter"
     },
   "engines": {
     "node": "0.8.x",
