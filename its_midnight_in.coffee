@@ -18,7 +18,6 @@ class ItsMidnightIn
     @checkRequirements()
     @setOauth()
     @checkTime()
-    setInterval @checkTime, 60000
     return @
 
   checkRequirements: ->
@@ -36,9 +35,9 @@ class ItsMidnightIn
       throw new Error("'#{key}' is needed") unless nodeConf.get(key)?
 
   checkTime: =>
+    setInterval @checkTime, 60000
     now = new Date()
     minute = now.getUTCMinutes()
-    console.log "#{hour}:#{minute}"
 
     if minute is 0
       @createTweet(now)
