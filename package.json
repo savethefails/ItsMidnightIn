@@ -1,15 +1,20 @@
 {
   "name": "its-midnight-in",
   "version": "0.0.1",
+  "private": true,
   "dependencies": {
     "coffee-script": "~1.8.0",
     "oauth": "0.9.10",
     "nconf": "0.6.7",
     "underscore": "",
-    "node-twitter": "istrategylabs/node-twitter"
-    },
+    "node-twitter": "~0.5.2"
+  },
   "engines": {
     "node": "0.8.x",
     "npm": "1.1.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/savethefails/ItsMidnightIn.git"
   }
 }
