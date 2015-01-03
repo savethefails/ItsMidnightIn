@@ -37,12 +37,15 @@ class ItsMidnightIn
       throw new Error("'#{key}' is needed") unless nodeConf.get(key)?
 
   checkTime: =>
-    # setInterval @checkTime, 60000
+    # setTimeout @checkTime, 60000
     now = new Date()
     minute = now.getUTCMinutes()
     console.log now
-    if true #minute is 0
+    if true #minute is 0 and not @tweetInProgress
       @createTweet(now)
+      @tweetInProgress = true
+    else
+      @tweetInProgress = false
 
   createTweet: (now = new Date(), send = true) ->
     hour = now.getUTCHours()

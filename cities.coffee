@@ -173,7 +173,7 @@ module.exports = [
     images: []
   }
   {
-    name: "#Kigali, Rwanda"
+    name: "Kigali, #Rwanda"
     offset:
       DST: 2
       ST: 2
@@ -187,21 +187,21 @@ module.exports = [
     images: []
   }
   {
-    name: "#Maputo, Mozambique"
+    name: "Maputo, #Mozambique"
     offset:
       DST: 2
       ST: 2
     images: []
   }
   {
-    name: "Tripoli, Libya"
+    name: "Tripoli, #Libya"
     offset:
       DST: 2
       ST: 2
     images: []
   }
   {
-    name: "Amsterdam, The Netherlands"
+    name: "#Amsterdam, The Netherlands"
     offset:
       DST: 2
       ST: 2
