@@ -1,4 +1,5 @@
-OAuth     = require 'oauth'
+# OAuth     = require 'oauth'
+Twitter   = require 'node-twitter'
 fs        = require 'fs'
 nodeConf  = require 'nconf'
 _         = require 'underscore'
@@ -16,7 +17,8 @@ class ItsMidnightIn
   constructor: (start = true) ->
     return unless start
     @checkRequirements()
-    @setOauth()
+    # @setOauth()
+    @setupTwitterClient()
     @checkTime()
     return @
 
@@ -35,11 +37,11 @@ class ItsMidnightIn
       throw new Error("'#{key}' is needed") unless nodeConf.get(key)?
 
   checkTime: =>
-    setInterval @checkTime, 60000
+    # setInterval @checkTime, 60000
     now = new Date()
     minute = now.getUTCMinutes()
-
-    if minute is 0
+    console.log now
+    if true #minute is 0
       @createTweet(now)
 
   createTweet: (now = new Date(), send = true) ->
@@ -47,9 +49,9 @@ class ItsMidnightIn
     utcDist = @getUTCDistance hour
     city = @getCity utcDist
     status = @buildStatus city.name
-
+    console.log status
     if send
-      @sendTweet status
+      @sendTweet status, city.images
     else
       status
 
@@ -123,7 +125,12 @@ class ItsMidnightIn
   # => 1
   getUTCDistance: (hour) -> if hour < 12 then 0 - hour else 24 - hour
 
-  sendTweet: (status) ->
+  sendTweet: (status, images = []) ->
+    if images.length > 0
+    else
+      @twitterClient.statusesUpdate {status: status}, (err, data) -> console.log "Error sendTweet", err, data
+
+  sendOauthTweet: (status) ->
     unless status?
       console.log "Warning: No status"
       return
@@ -147,6 +154,14 @@ class ItsMidnightIn
     , '1.0'
     , null
     , 'HMAC-SHA1'
+    )
+
+  setupTwitterClient: ->
+    @twitterClient = new Twitter.RestClient(
+        nodeConf.get('consumer_key'),
+        nodeConf.get('consumer_secret'),
+        nodeConf.get('access_token'),
+        nodeConf.get('access_secret')
     )
 
 module.exports = ItsMidnightIn
