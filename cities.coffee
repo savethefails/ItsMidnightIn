@@ -989,7 +989,7 @@ module.exports = [
     offset:
       DST: -1
       ST: -1
-    images: []
+    images: ['praia1.jpg', 'praia2.jpg']
   }
   {
     name: "#Nuuk, #Greenland"
