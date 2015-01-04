@@ -26,7 +26,7 @@ class ItsMidnightIn
 
   constructor: (options = {}) ->
     @setupOptions(options)
-
+    console.log @options
     return unless @options.autoStart
 
     @checkRequirements()
@@ -69,6 +69,7 @@ class ItsMidnightIn
     setTimeout @checkTime, @options.timeoutTime unless @options.preventTimer
     now = new Date()
     minute = now.getUTCMinutes()
+    console.log now
     if @options.tweetNow or (minute is 0 and not @tweetInProgress)
       @createTweet(now)
       @tweetInProgress = true
@@ -82,6 +83,7 @@ class ItsMidnightIn
     status = @buildStatus city.name
     imageURL = @generateImageURL city.images
     console.log ''
+    console.log '************'
     console.log now, status, imageURL
 
     if @options.sendTweet
