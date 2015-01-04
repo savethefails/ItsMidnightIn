@@ -15,7 +15,7 @@ class ItsMidnightIn
   cities: Cities
   timeType: 'ST'
   imagePath: './assets/'
-  stockImages: ['stock1.jpeg', 'stock2.jpg']
+  stockImages: ['stock1.jpeg', 'stock2.jpg', 'stock3.jpg', 'stock4.jpg', 'stock5.png']
 
   constructor: (options = {}) ->
     @setupOptions(options)
