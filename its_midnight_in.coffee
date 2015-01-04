@@ -27,7 +27,7 @@ class ItsMidnightIn
 
   constructor: (options = {}) ->
     @setupOptions(options)
-    console.log @options
+
     return unless @options.autoStart
 
     @checkRequirements()
@@ -72,7 +72,6 @@ class ItsMidnightIn
     now = new Date()
     minute = now.getUTCMinutes()
     if @options.tweetNow or (minute is 0 and not @tweetInProgress)
-      console.log now
       @createTweet(now)
       @tweetInProgress = true
     else
@@ -84,25 +83,40 @@ class ItsMidnightIn
     city = @getCity utcDist
     status = @buildStatus city.name
     imageURL = @generateImageURL city.images
-    console.log status, imageURL
+    console.log ''
+    console.log now, status, imageURL
 
     if @options.sendTweet
       @sendTweet status, imageURL
     else
       [status, imageURL]
 
-  generateImageURL: (images = []) ->
+  generateImageURL: (images = [], timesLooped = 0) ->
+    timesLooped += 1
 
-    if images.length is 0 and _.random(10) > 8
+    # If there is no image for this city, only show a stock image 20% of the time
+    if (not images? or images.length is 0) and _.random(9) > 7
       images = @stockImages
 
     image = _.sample(images)
 
-    if not image? or @lastImage is image
-      return null
-    else
-      imageURL = "#{@imagePath}#{image.toLowerCase()}"
-      return imageURL if fs.existsSync path.normalize imageURL
+    imageURL = "#{@imagePath}#{String(image).toLowerCase()}"
+    imageURL = null unless fs.existsSync path.normalize imageURL
+
+    # If the image being used was recently seen
+    if @lastImageURL is imageURL
+      # try and generate another one, but only if we haven't looped too many times
+      if @options.maxImageLoop < timesLooped
+        return @generateImageURL images, timesLooped
+      imageURL = null
+
+    @lastImageURL = imageURL if imageURL?
+
+    return imageURL
+
+
+
+
 
   buildStatus: (city) -> "Its midnight in #{city}#{@randomHashtag()}"
 
@@ -175,16 +189,13 @@ class ItsMidnightIn
   getUTCDistance: (hour) -> if hour < 12 then 0 - hour else 24 - hour
 
   sendTweet: (status, imageURL) ->
-
     tweetParams = status: status
 
     if imageURL
       tweetParams['media[]'] = imageURL
       method = 'statusesUpdateWithMedia'
-      @lastImage = imageURL
     else
       method = 'statusesUpdate'
-      @lastImage = null
 
     @twitterClient[method] tweetParams, (err, data) -> console.log("Error #{method}", err) if err
 
