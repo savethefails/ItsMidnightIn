@@ -317,7 +317,7 @@ module.exports = [
     offset:
       DST: 2
       ST: 2
-    images: ['prague1.jpg','prague2.jpg','prague3.jpg','prague4.jpg','prague5.jpg',]
+    images: ['prague1.jpg','prague2.jpg','prague3.jpg','prague4.jpg','prague5.jpg']
   }
   {
     name: "#Rome, Italy"
@@ -534,7 +534,7 @@ module.exports = [
     offset:
       DST: 4
       ST: 4
-    images: ['muscat1.jpg','muscat2.jpg','muscat3.jpg',]
+    images: ['muscat1.jpg','muscat2.jpg','muscat3.jpg']
   }
   {
     name: "#Tbilisi, Georgia"
@@ -646,14 +646,14 @@ module.exports = [
     offset:
       DST: 7
       ST: 7
-    images: []
+    images: ['davis1.jpg','davis2.jpg','davis3.jpg','davis4.jpg','davis5.jpg','davis6.jpg','davis7.jpg','davis8.jpg','davis9.jpg']
   }
   {
-    name: "B#angkok, Thailand"
+    name: "#Bangkok, Thailand"
     offset:
       DST: 7
       ST: 7
-    images: []
+    images: ['bangkok1.jpg','bangkok2.jpg','bangkok3.jpg','bangkok4.jpg','bangkok5.jpg']
   }
   {
     name: "#Saigon, Vietnam"
