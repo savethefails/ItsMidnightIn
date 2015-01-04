@@ -4,6 +4,7 @@ fs        = require 'fs'
 nodeConf  = require 'nconf'
 _         = require 'underscore'
 Cities    = require './cities'
+path      = require 'path'
 
 # Load configuration
 nodeConf.file 'keys', './config/twitter_keys.json'
@@ -13,14 +14,38 @@ nodeConf.env() # if the above files are empty, look in the environment variable
 class ItsMidnightIn
   cities: Cities
   timeType: 'ST'
+  imagePath: './assets/'
+  stockImages: ['stock1.jpeg', 'stock2.jpg']
 
-  constructor: (start = true) ->
-    return unless start
+  constructor: (options = {}) ->
+    @setupOptions(options)
+    console.log @options
+    return unless @options.autoStart
+
     @checkRequirements()
     # @setOauth()
     @setupTwitterClient()
     @checkTime()
-    return @
+
+  setupOptions: (options = {}) ->
+    envConfig =
+      autoStart: nodeConf.get('autoStart')
+      tweetNow: nodeConf.get('tweetNow')
+      preventTimer: nodeConf.get('preventTimer')
+      sendTweet: nodeConf.get('sendTweet')
+
+    defaultConfig =
+      autoStart: true
+      tweetNow: false
+      preventTimer: false
+      sendTweet: true
+
+    @options = _.chain(options)
+              .defaults _.defaults envConfig, defaultConfig
+              .each (value, key, options) ->
+                options[key] = true if _.include(['true', 1, '1'], value)
+                options[key] = false if _.include(['false', 0, '0'], value)
+              .value()
 
   checkRequirements: ->
     requirements = [
@@ -37,31 +62,46 @@ class ItsMidnightIn
       throw new Error("'#{key}' is needed") unless nodeConf.get(key)?
 
   checkTime: =>
-    # setTimeout @checkTime, 60000
+    setTimeout @checkTime, 60000 unless @options.preventTimer
     now = new Date()
     minute = now.getUTCMinutes()
     console.log now
-    if true #minute is 0 and not @tweetInProgress
+    if @options.tweetNow or (minute is 0 and not @tweetInProgress)
       @createTweet(now)
       @tweetInProgress = true
     else
       @tweetInProgress = false
 
-  createTweet: (now = new Date(), send = true) ->
+  createTweet: (now = new Date()) ->
     hour = now.getUTCHours()
     utcDist = @getUTCDistance hour
     city = @getCity utcDist
     status = @buildStatus city.name
-    console.log status
-    if send
-      @sendTweet status, city.images
-    else
-      status
+    imageURL = @generateImageURL city.images
+    console.log status, imageURL
 
-  buildStatus: (city) -> "It's midnight in #{city}#{@randomHashtag()}"
+    if @options.sendTweet
+      @sendTweet status, imageURL
+    else
+      [status, imageURL]
+
+  generateImageURL: (images = []) ->
+
+    if images.length is 0 and _.random(10) > 8
+      images = @stockImages
+
+    image = _.sample(images)
+
+    if not image? or @lastImage is image
+      return null
+    else
+      imageURL = "#{@imagePath}#{image.toLowerCase()}"
+      return imageURL if fs.existsSync path.normalize imageURL
+
+  buildStatus: (city) -> "Its midnight in #{city}#{@randomHashtag()}"
 
   randomHashtag: ->
-    num = Math.floor(Math.random()*10)
+    num =  _.random(10)
     msg = ""
     msg += "#{if msg isnt "" then " " else ""}#midnight" if num > 4
     msg += "#{if msg isnt "" then " " else ""}#12am" if num > 6
@@ -128,10 +168,19 @@ class ItsMidnightIn
   # => 1
   getUTCDistance: (hour) -> if hour < 12 then 0 - hour else 24 - hour
 
-  sendTweet: (status, images = []) ->
-    if images.length > 0
+  sendTweet: (status, imageURL) ->
+
+    tweetParams = status: status
+
+    if imageURL
+      tweetParams['media[]'] = imageURL
+      method = 'statusesUpdateWithMedia'
+      @lastImage = imageURL
     else
-      @twitterClient.statusesUpdate {status: status}, (err, data) -> console.log "Error sendTweet", err, data
+      method = 'statusesUpdate'
+      @lastImage = null
+
+    @twitterClient[method] tweetParams, (err, data) -> console.log("Error #{method}", err) if err
 
   sendOauthTweet: (status) ->
     unless status?
