@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "coffee-script": "~1.8.0",
-    "oauth": "0.9.10",
     "nconf": "0.6.7",
     "underscore": "",
     "node-twitter": "~0.5.2"

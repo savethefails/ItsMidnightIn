@@ -1,4 +1,3 @@
-# OAuth     = require 'oauth'
 Twitter   = require 'node-twitter'
 fs        = require 'fs'
 nodeConf  = require 'nconf'
@@ -31,7 +30,6 @@ class ItsMidnightIn
     return unless @options.autoStart
 
     @checkRequirements()
-    # @setOauth()
     @setupTwitterClient()
     @checkTime()
 
@@ -198,32 +196,6 @@ class ItsMidnightIn
       method = 'statusesUpdate'
 
     @twitterClient[method] tweetParams, (err, data) -> console.log("Error #{method}", err) if err
-
-  sendOauthTweet: (status) ->
-    unless status?
-      console.log "Warning: No status"
-      return
-    @oauth.post(
-      nodeConf.get('tweet_url')
-    , nodeConf.get('access_token')
-    , nodeConf.get('access_secret')
-    , status: status
-    , (e, data, res) ->
-        console.log ''
-        console.log ''
-        console.log "Error!", new Date(), e if e?
-    )
-
-  setOauth: ->
-    @oauth = new OAuth.OAuth(
-      nodeConf.get('request_token_url')
-    , nodeConf.get('access_token_url')
-    , nodeConf.get('consumer_key')
-    , nodeConf.get('consumer_secret')
-    , '1.0'
-    , null
-    , 'HMAC-SHA1'
-    )
 
   setupTwitterClient: ->
     @twitterClient = new Twitter.RestClient(
