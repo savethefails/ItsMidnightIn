@@ -17,6 +17,14 @@ class ItsMidnightIn
   imagePath: './assets/'
   stockImages: ['stock1.jpeg', 'stock2.jpg', 'stock3.jpg', 'stock4.jpg', 'stock5.png']
 
+  defaults:
+    autoStart: true
+    tweetNow: false
+    preventTimer: false
+    sendTweet: true
+    timeoutTime: 60000
+    maxImageLoop: 2
+
   constructor: (options = {}) ->
     @setupOptions(options)
     console.log @options
@@ -28,24 +36,22 @@ class ItsMidnightIn
     @checkTime()
 
   setupOptions: (options = {}) ->
-    envConfig =
-      autoStart: nodeConf.get('autoStart')
-      tweetNow: nodeConf.get('tweetNow')
-      preventTimer: nodeConf.get('preventTimer')
-      sendTweet: nodeConf.get('sendTweet')
-
-    defaultConfig =
-      autoStart: true
-      tweetNow: false
-      preventTimer: false
-      sendTweet: true
-
-    @options = _.chain(options)
-              .defaults _.defaults envConfig, defaultConfig
-              .each (value, key, options) ->
-                options[key] = true if _.include(['true', 1, '1'], value)
-                options[key] = false if _.include(['false', 0, '0'], value)
-              .value()
+    @options = _.chain(@defaults)
+                .clone()
+                # Generate a new object with the keys of @defaults, and the values from environment
+                .reduce (memo, val, key) ->
+                    memo[key] = nodeConf.get(key)
+                    return memo
+                  , {}
+                # Any missing values from the environment are filled in by @defaults
+                .defaults @defaults
+                # Swap out the object we're dealing and fill in missing options
+                .tap (defaults) -> defaults = _.defaults(options, defaults)
+                # Map strings and integers to true/false
+                .each (value, key, options) ->
+                  options[key] = true if _.include(['true', 1, '1'], value)
+                  options[key] = false if _.include(['false', 0, '0'], value)
+                .value()
 
   checkRequirements: ->
     requirements = [
@@ -62,7 +68,7 @@ class ItsMidnightIn
       throw new Error("'#{key}' is needed") unless nodeConf.get(key)?
 
   checkTime: =>
-    setTimeout @checkTime, 60000 unless @options.preventTimer
+    setTimeout @checkTime, @options.timeoutTime unless @options.preventTimer
     now = new Date()
     minute = now.getUTCMinutes()
     if @options.tweetNow or (minute is 0 and not @tweetInProgress)
