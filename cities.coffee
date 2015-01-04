@@ -9,49 +9,49 @@ module.exports = [
     offset:
       DST: 0
       ST: 0
-    images: []
+    images: ['timbuktu.jpg']
   }
   {
     name: "Freetown, #SierraLeone"
     offset:
       DST: 0
       ST: 0
-    images: []
+    images: ['freetown1.jpg', 'freetown2.jpg', 'freetown3.jpg']
   }
   {
     name: "Dakar, #Senegal"
     offset:
       DST: 0
       ST: 0
-    images: []
+    images: ['dakar1.jpg', 'dakar2.jpg']
   }
   {
     name: "Bamako, #Mali"
     offset:
       DST: 0
       ST: 0
-    images: []
+    images: ['bamako1.jpg', 'bamako2.jpg']
   }
   {
     name: "Accra, #Ghana"
     offset:
       DST: 0
       ST: 0
-    images: []
+    images: ['accra1.jpg','accra2.jpg','accra3.jpg','accra4.jpg']
   }
   {
     name: "The #Azores Archipelago"
     offset:
       DST: 0
       ST: 0
-    images: []
+    images: ['azores1.jpg', 'azores2.jpg', 'azores3.jpg', 'azores4.jpg']
   }
   {
     name: "#Reykjavík, Iceland"
     offset:
       DST: 0
       ST: 0
-    images: []
+    images: ['reykjavik1.jpg', 'reykjavik2.jpg', 'reykjavik3.jpg', 'reykjavik4.jpg']
   }
   {
     name: "#Casablanca, #Morocco"
@@ -173,11 +173,25 @@ module.exports = [
     images: []
   }
   {
-    name: "Kigali, #Rwanda"
+    name: "Cape Town, South Africa"
     offset:
       DST: 2
       ST: 2
-    images: []
+    images: ['capetown.png']
+  }
+  {
+    name: "#Windhoek, Namibia"
+    offset:
+      DST: 1
+      ST: 2
+    images: ['windhoek.png']
+  }
+  {
+    name: "#Kigali, Rwanda"
+    offset:
+      DST: 2
+      ST: 2
+    images: ['kigali.png']
   }
   {
     name: "#Lusaka, Zambia"
@@ -191,7 +205,7 @@ module.exports = [
     offset:
       DST: 2
       ST: 2
-    images: []
+    images: ['maputo.png']
   }
   {
     name: "Tripoli, #Libya"
@@ -303,7 +317,7 @@ module.exports = [
     offset:
       DST: 2
       ST: 2
-    images: []
+    images: ['prague1.jpg','prague2.jpg','prague3.jpg','prague4.jpg','prague5.jpg',]
   }
   {
     name: "#Rome, Italy"
@@ -502,18 +516,25 @@ module.exports = [
     images: []
   }
   {
+    name: "#Khartoum, Sudan"
+    offset:
+      DST: 3
+      ST: 3
+    images: ['khartoum.png']
+  }
+  {
     name: "Dubai, United Arab Emirates"
     offset:
       DST: 4
       ST: 4
-    images: []
+    images: ['dubai1.jpg','dubai2.jpg','dubai3.jpg','dubai4.jpg']
   }
   {
     name: "Muscat, Oman"
     offset:
       DST: 4
       ST: 4
-    images: []
+    images: ['muscat1.jpg','muscat2.jpg','muscat3.jpg',]
   }
   {
     name: "#Tbilisi, Georgia"
@@ -544,42 +565,42 @@ module.exports = [
     images: []
   }
   {
-    name: "3Ashgabat, Turkmenistan"
+    name: "#Ashgabat, Turkmenistan"
     offset:
       DST: 5
       ST: 5
     images: []
   }
   {
-    name: "3Baku, Azerbaijan"
+    name: "#Baku, Azerbaijan"
     offset:
       DST: 5
       ST: 5
     images: []
   }
   {
-    name: "3Karachi, Pakistan"
+    name: "#Karachi, Pakistan"
     offset:
       DST: 5
       ST: 5
     images: []
   }
   {
-    name: "3Dushanbe, Tajikistan"
+    name: "#Dushanbe, Tajikistan"
     offset:
       DST: 5
       ST: 5
     images: []
   }
   {
-    name: "3Samarkand, Uzbekistan"
+    name: "#Samarkand, Uzbekistan"
     offset:
       DST: 5
       ST: 5
     images: []
   }
   {
-    name: "Malé, 3Maldives"
+    name: "Malé, #Maldives"
     offset:
       DST: 5
       ST: 5
@@ -1423,7 +1444,7 @@ module.exports = [
     offset:
       DST: -5
       ST: -5
-    images: []
+    images: ['kingston1.jpg', 'kingston2.jpg']
   }
   {
     name: "#Ferguson, Missouri"
@@ -1472,7 +1493,7 @@ module.exports = [
     offset:
       DST: -6
       ST: -6
-    images: []
+    images: ['leon1.jpg', 'leon2.jpg']
   }
   {
     name: "Los Angeles, United States of America"
@@ -1545,7 +1566,7 @@ module.exports = [
     images: []
   }
   {
-    name: "the Mangareva Islands, French Polynesia"
+    name: "The Mangareva Islands, French Polynesia"
     offset:
       DST: -9
       ST: -9
@@ -1699,12 +1720,12 @@ module.exports = [
 #   "5":  [
 #         "Mawson Station, #Antarctica"
 #         "Astana, #Kazakhstan"
-#         "3Ashgabat, Turkmenistan"
-#         "3Baku, Azerbaijan"
-#         "3Karachi, Pakistan"
-#         "3Dushanbe, Tajikistan"
-#         "3Samarkand, Uzbekistan"
-#         "Malé, 3Maldives"
+#         "#Ashgabat, Turkmenistan"
+#         "#Baku, Azerbaijan"
+#         "#Karachi, Pakistan"
+#         "#Dushanbe, Tajikistan"
+#         "#Samarkand, Uzbekistan"
+#         "Malé, #Maldives"
 #         ]
 #   "6":  [
 #         "Thimphu, #Bhutan"
