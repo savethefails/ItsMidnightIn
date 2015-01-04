@@ -65,8 +65,8 @@ class ItsMidnightIn
     setTimeout @checkTime, 60000 unless @options.preventTimer
     now = new Date()
     minute = now.getUTCMinutes()
-    console.log now
     if @options.tweetNow or (minute is 0 and not @tweetInProgress)
+      console.log now
       @createTweet(now)
       @tweetInProgress = true
     else
