@@ -12,7 +12,7 @@ nodeConf.env() # if the above files are empty, look in the environment variable
 
 class ItsMidnightIn
   cities: Cities
-  timeType: 'ST'
+  timeType: 'DST'
   imagePath: './assets/'
   stockImages: ['stock1.jpeg', 'stock2.jpg', 'stock3.jpg', 'stock4.jpg', 'stock5.png']
 
